@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secretaria de Educação - Cuité</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilos Gerais e Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #ADEBB3;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Menu Superior */
+        header {
+            background-color: #1b4d3e;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 60px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ADEBB3;
+        }
+
+        /* Conteúdo e Páginas */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* MENU INICIAL EM GRADE 4x4 (4 COLUNAS) */
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .btn-menu {
+            background-color: #1b4d3e;
+            color: white;
+            border: none;
+            padding: 30px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-menu:hover {
+            background-color: #143a2e;
+            transform: scale(1.02);
+        }
+
+        /* Container do Botão Voltar */
+        .back-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        /* Botão Voltar Comum */
+        .btn-back {
+            background-color: #1b4d3e;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .btn-back:hover {
+            background-color: #143a2e;
+            transform: scale(1.02);
+        }
+
+        /* Títulos fora das caixas brancas */
+        .page-title-outside {
+            color: #1b4d3e; 
+            margin-bottom: 20px;
+        }
+
+        .page-title-outside.centered {
+            text-align: center;
+        }
+
+        /* CAIXAS BRANCAS PADRÃO (Corte, Login, Conselhos, etc.) */
+        .corte-container, .login-container, .rh-dashboard-container, .conselhos-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .rh-dashboard-container {
+            max-width: 100%;
+        }
+
+        /* Estilos Internos dos Conselhos */
+        .conselho-box {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        .conselho-box:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .conselho-box h3 {
+            color: #1b4d3e;
+            margin-bottom: 10px;
+            font-size: 1.15rem;
+        }
+
+        .conselho-box p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1b4d3e;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #1b4d3e;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .btn-login {
+            background-color: #1b4d3e;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-calc, .btn-login:hover {
+            background-color: #143a2e;
+        }
+
+        .btn-calc {
+            background-color: #1b4d3e;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: background-color 0.2s;
+        }
+
+        /* Controles de Filtro Gerais do RH e Escolas */
+        .filter-wrapper-single {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-input-single {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px;
+            border: 2px solid #1b4d3e;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .btn-clear-filter {
+            background-color: #bf360c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-clear-filter:hover {
+            background-color: #870000;
+        }
+
+        .rh-counter {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1b4d3e;
+            margin-bottom: 20px;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f4fbf5;
+            border-left: 5px solid #1b4d3e;
+            border-radius: 4px;
+            text-align: center;
+            display: none;
+        }
+
+        .result-box p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .mec-link {
+            margin-top: 25px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .mec-link a {
+            color: #1b4d3e;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* Classe de Destaque para as buscas */
+        mark.match-highlight {
+            background-color: #ffeb3b;
+            color: #000;
+            padding: 2px 0;
+            border-radius: 2px;
+        }
+
+        /* MCCEB */
+        .mcceb-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+            background: #ADEBB3;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .mcceb-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .mcceb-title {
+            font-family: 'Sigmar One', sans-serif;
+            font-size: 35px;
+            color: #1b4d3e;
+            line-height: 1.3;
+            text-align: center;
+            flex: 1;
+        }
+
+        .logo-300 {
+            width: 300px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .mcceb-text {
+            flex: 1;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .mcceb-img {
+            max-width: 40%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .mcceb-links-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .mcceb-links-container h3 {
+            color: #1b4d3e;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .mcceb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .mcceb-link-card {
+            background: #1b4d3e;
+            border: 2px solid #1b4d3e;
+            padding: 15px;
+            text-align: center;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .mcceb-link-card:hover {
+            background: white;
+            color: #1b4d3e;
+        }
+
+        .insta-btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .insta-mcceb {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #ffffff;
+            border: 2px solid #E1306C;
+            color: #E1306C;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .insta-mcceb img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .insta-mcceb:hover {
+            background: #E1306C;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* TELA DO CALENDÁRIO ESCOLAR */
+        .calendario-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .calendario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-download-pdf {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .btn-download-pdf:hover {
+            background-color: #218838;
+        }
+
+        .pdf-wrapper {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 141.4%; 
+            border: 2px solid #1b4d3e;
+            border-radius: 6px;
+            background-color: #eee;
+        }
+
+        .pdf-wrapper embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ESCOLAS / IDEB - TABELAS */
+        .table-container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #1b4d3e;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        #tabelaServidores {
+            min-width: 100% !important;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        #tabelaServidores th, 
+        #tabelaServidores td {
+            padding: 8px 6px;
+            font-size: 0.82rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        #tabelaServidores th:nth-child(1) { width: 5%; }  
+        #tabelaServidores th:nth-child(2) { width: 22%; } 
+        #tabelaServidores th:nth-child(3) { width: 12%; } 
+        #tabelaServidores th:nth-child(4) { width: 9%; }  
+        #tabelaServidores th:nth-child(5) { width: 15%; } 
+        #tabelaServidores th:nth-child(6) { width: 9%; }  
+        #tabelaServidores th:nth-child(7) { width: 13%; } 
+        #tabelaServidores th:nth-child(8) { width: 9%; }  
+        #tabelaServidores th:nth-child(9) { width: 9%; }  
+        #tabelaServidores th:nth-child(10) { width: 4%; } 
+
+        .tabela-resumida {
+            min-width: 100%;
+        }
+
+        .tabela-resumida th:first-child, 
+        .tabela-resumida td:first-child {
+            text-align: left;
+        }
+
+        .tabela-resumida th:not(:first-child),
+        .tabela-resumida td:not(:first-child) {
+            text-align: center;
+            width: 12%;
+        }
+
+        .tabela-alinhada-ideb th.col-ano,
+        .tabela-alinhada-ideb td.col-ano {
+            text-align: center;
+        }
+
+        .ideb-sections-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .ideb-sections-wrapper .table-container {
+            margin-bottom: 20px;
+        }
+
+        .scroller-desativado {
+            overflow-x: visible !important; 
+        }
+
+        /* SETORES */
+        .setores-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .btn-setor {
+            background-color: #1b4d3e;
+            color: white;
+            border: none;
+            padding: 25px 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: default;
+        }
+
+        /* RODAPÉ */
+        footer {
+            background-color: #1b4d3e;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-box h4 {
+            color: #ADEBB3;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 5px;
+        }
+
+        .footer-box a {
+            color: white;
+            text-decoration: underline;
+        }
+        .footer-box a:hover {
+            color: #ADEBB3;
+        }
+
+        /* Responsividade (Dispositivos Móveis) */
+        @media (max-width: 992px) {
+            .ideb-sections-wrapper {
+                grid-template-columns: 1fr; 
+                gap: 10px;
+            }
+            .tabela-resumida th, .tabela-resumida td {
+                padding: 10px 8px;
+                font-size: 0.85rem;
+            }
+            #tabelaServidores {
+                min-width: 900px !important;
+                table-layout: auto !important;
+            }
+            #tabelaServidores th, 
+            #tabelaServidores td {
+                font-size: 0.9rem;
+                white-space: nowrap !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .grid-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .mcceb-header, .mcceb-section {
+                flex-direction: column !important;
+                text-align: center;
+            }
+
+            .logo-300, .mcceb-img {
+                max-width: 80%;
+            }
+
+            .setores-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#" onclick="showPage('home')">
+                    <img src="https://i.ibb.co/Ng8ckjmN/LOGO-PMC-SEC-EDU-2.png" alt="Logo PMC SEC EDU">
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="#" onclick="showPage('home')">Início</a>
+                <a href="https://cuite.pb.gov.br/" target="_blank">Prefeitura</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="home" class="page active">
+            <div class="grid-menu">
+                <button class="btn-menu" onclick="showPage('escolas')">Escolas e Creches</button>
+                <button class="btn-menu" onclick="showPage('corte')">Corte Etário</button>
+                <button class="btn-menu" onclick="showPage('calendario')">Calendário Escolar</button>
+                <button class="btn-menu" onclick="showPage('ideb')">IDEB</button>
+                <button class="btn-menu" onclick="showPage('setores')">Setores</button>
+                <button class="btn-menu" onclick="showPage('conselhos')">Conselhos</button>
+                <button class="btn-menu" onclick="showPage('mcceb')">MCCEB</button>
+                <button class="btn-menu" onclick="showPage('rh')">RH</button>
+            </div>
+        </section>
+
+        <section id="corte" class="page">
+            <h2 class="page-title-outside centered">Calculadora de Corte Etário</h2>
+            
+            <div class="corte-container">
+                <div class="form-group">
+                    <label for="dataNasc">Data de nascimento:</label>
+                    <input type="date" id="dataNasc" onchange="validarDatas()">
+                </div>
+
+                <div class="form-group">
+                    <label for="dataRef">Data referência do Corte Etário:</label>
+                    <input type="date" id="dataRef" onchange="validarDatas()">
+                </div>
+
+                <button class="btn-calc" onclick="calcularCorteEtario()">Calcular Idade</button>
+
+                <div id="resultadoCorte" class="result-box">
+                    <p id="txtIdade"></p>
+                    <p id="txtClassificacao"></p>
+                </div>
+
+                <div class="mec-link">
+                    Para saber mais sobre o Corte Etário, clique em:<br>
+                    <a href="https://www.gov.br/mec/pt-br/cne/normas-classificadas-por-assunto/corte-etario" target="_blank">Normas do MEC</a>
+                </div>
+            </div>
+            <div class="back-container">
+                <button class="btn-back" onclick="showPage('home')">Voltar para Início</button>
+            </div>
+        </section>
+
+        <section id="mcceb" class="page">
+            <div class="mcceb-header">
+                <img class="logo-300" src="https://i.ibb.co/4nYBc86f/MCCEB-LOGO.png" alt="Logo MCCEB">
+                <div class="mcceb-title">6ª MOSTRA CIENTÍFICA CUITEENSE DA EDUCAÇÃO BÁSICA</div>
+            </div>
+
+            <div class="mcceb-section">
+                <img class="mcceb-img" src="https://i.ibb.co/SDrsxYcm/1.jpg" alt="Foto MCCEB">
+                <div class="mcceb-text">
+                    A <strong>Mostra Científica Cuiteense da Educação Básica (MCCEB)</strong> é um evento realizado no município de Cuité, na Paraíba, e foi idealizado pela Secretaria de Educação, Aline Nieble, e pelo professor Wagner Macedo, no ano de 2019.
+                    <br><br>
+                    Ela tem o objetivo de apresentar projetos desenvolvidos durante o ano letivo por estudantes com auxílio de professores, podendo também expor práticas metodológicas exitosas realizadas em sala de aula, a fim de facilitar os processos de ensino e de aprendizagem e divulgar a ciência em âmbito escolar.
+                </div>
+            </div>
+
+            <div class="mcceb-links-container">
+                <h3>Links</h3>
+                <div class="mcceb-grid">
+                    <a href="https://forms.gle/YRvnAwAnuCCLvHEQ6" target="_blank" class="mcceb-link-card">Edital da 6ª MCCEB</a>
+                    <a href="https://forms.gle/JrwzseUkwhLQybbs9" target="_blank" class="mcceb-link-card">Inscrições de 10 a 20/Agosto</a>
+                    <a href="https://forms.gle/JrwzseUkwhLQybbs9" target="_blank" class="mcceb-link-card">Projetos Homologados</a>
+                    <a href="https://forms.gle/YRvnAwAnuCCLvHEQ6" target="_blank" class="mcceb-link-card">Modelo de Resumo e Banner do Projeto</a>
+                </div>
+                
+                <div class="insta-btn-container">
+                    <a href="https://www.instagram.com/mcceb.cuitepb/" target="_blank" class="insta-mcceb">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                        @mcceb.cuitepb
+                    </a>
+                </div>
+            </div>
+            <div class="back-container">
+                <button class="btn-back" onclick="showPage('home')">Voltar para Início</button>
+            </div>
+        </section>
+
+        <section id="calendario" class="page">
+            <h2 class="page-title-outside centered">Calendário Escolar 2026</h2>
+            
+            <div class="calendario-container">
+                <div class="calendario-header">
+                    <span style="color: #1b4d3e; font-weight: 600;">Atualizado em 28/04/2026 após o Decreto Nº 2006 de 16 de abril de 2026</span>
+                    <a href="file:///G:/Meu%20Drive/INSPETORIA/CALEND%C3%81RIO%20ESCOLAR/2026/CALEND%C3%81RIO%20ESCOLAR%202026%20(28-04-2026).pdf" download="Calendario_Escolar_Cuite.pdf" class="btn-download-pdf">Salvar PDF</a>
+                </div>
+
+                <div class="pdf-wrapper">
+                    <embed src="file:///G:/Meu%20Drive/INSPETORIA/CALEND%C3%81RIO%20ESCOLAR/2026/CALEND%C3%81RIO%20ESCOLAR%202026%20(28-04-2026).pdf" type="application/pdf">
+                </div>
+            </div>
+
+            <div class="back-container">
+                <button class="btn-back" onclick="showPage('home')">Voltar para Início</button>
+            </div>
+        </section>
+
+        <section id="escolas" class="page">
+            <h2 class="page-title-outside centered">Lista de Escolas e Creches</h2>
+            
+            <div class="table-container">
+                <div class="filter-wrapper-single">
+                    <input type="text" id="escolaSearchInput" class="search-input-single" placeholder="Pesquise por múltiplos termos separados por vírgula (Ex: creche, rural)" onkeyup="filtrarEscolasMúltiplosTermos()">
+                    <button class="btn-clear-filter" onclick="limparFiltroEscolas()">Limpar Filtro</button>
+                </div>
+
+                <table id="tabelaEscolas">
+                    <thead>
+                        <tr>
+                            <th>INEP</th>
+                            <th>INSTITUIÇÃO</th>
+                            <th>ENDEREÇO</th>
+                            <th>LOCALIZAÇÃO</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="back-container">
+                <button class="btn-back" onclick="showPage('home')">Voltar para Início</button>
+            </div>
+        </section>
+
+        <section id="setores" class="page">
+            <h2 style="color:#1b4d3e; margin-bottom: 20px; text-align: center;">Setores da Secretaria</h2>
+            <div class="setores-grid">
+                <button class="btn-setor">Gabinete da Secretária de Educação</button>
+                <button class="btn-setor">Coordenação Pedagógica</button>
+                <button class="btn-setor">Orientação Educacional</button>
+                <button class="btn-setor">Inspetoria de Ensino</button>
+                <button class="btn-setor">Gerência de Conselhos Escolares</button>
+                <button class="btn-setor">Gerência de Alimentação Escolar</button>
+                <button class="btn-setor">Setor de Psicologia e Psicopedagogia</button>
+                <button class="btn-setor">Estatística</button>
+                <button class="btn-setor">Almoxarifado e Estoque</button>
+            </div>
+            <div class="back-container">
+                <button class="btn-back" onclick="showPage('home')">Voltar para Início</button>
+            </div>
+        </section>
+
+        <section id="ideb" class="page">
+            <h2 style="color:#1b4d3e; margin-bottom: 25px; text-align: center;">Índice de Desenvolvimento da Educação Básica (IDEB)</h2>
+            
+            <div class="ideb-sections-wrapper">
+                <div class="table-container scroller-desativado">
+                    <h3 style="color:#1b4d3e; margin-bottom: 15px;">IDEB dos Anos Iniciais</h3>
+                    <div>
+                        <table class="tabela-resumida">
+                            <thead>
+                                <tr>
+                                    <th>ETAPA</th>
+                                    <th>2025</th>
+                                    <th>2023</th>
+                                    <th>2021</th>
+                                    <th>2019</th>
+                                    <th>2017</th>
+                                    <th>2015</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Anos Iniciais</strong></td>
+                                    <td>x</td>
+                                    <td>6,3</td>
+                                    <td>6,0</td>
+                                    <td>6,1</td>
+                                    <td>5,8</td>
+                                    <td>5,7</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="table-container scroller-desativado">
+                    <h3 style="color:#1b4d3e; margin-bottom: 15px;">IDEB dos Anos Finais</h3>
+                    <div>
+                        <table class="tabela-resumida">
+                            <thead>
+                                <tr>
+                                    <th>ETAPA</th>
+                                    <th>2025</th>
+                                    <th>2023</th>
+                                    <th>2021</th>
+                                    <th>2019</th>
+                                    <th>2017</th>
+                                    <th>2015</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Anos Finais</strong></td>
+                                    <td>x</td>
+                                    <td>5,3</td>
+                                    <td>4,4</td>
+                                    <td>4,0</td>
+                                    <td>3,6</td>
+                                    <td>3,6</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <h3 style="color:#1b4d3e; margin-bottom: 15px;">IDEB por Escola</h3>
+                <div style="overflow-x: auto;">
+                    <table id="tabelaIdebEscola" class="tabela-alinhada-ideb">
+                        <thead>
+                            <tr>
+                                <th>ESCOLA</th>
+                                <th>LOCALIZAÇÃO</th>
+                                <th>ETAPA</th>
+                                <th class="col-ano">2025</th>
+                                <th class="col-ano">2023</th>
+                                <th class="col-ano">2021</th>
+                                <th class="col-ano">2019</th>
+                                <th class="col-ano">2017</th>
+                                <th class="col-ano">2015</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="back-container">
+                <button class="btn-back" onclick="showPage('home')">Voltar para Início</button>
+            </div>
+        </section>
+
+        <section id="rh" class="page">
+            <div id="rh-login-box">
+                <h2 class="page-title-outside centered">Área do RH - Login</h2>
+                <div class="login-container">
+                    <div class="form-group">
+                        <label for="usuarioRH">Usuário:</label>
+                        <input type="text" id="usuarioRH" placeholder="Digite seu usuário" onkeydown="verificarTeclaEnter(event)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senhaRH">Senha:</label>
+                        <input type="password" id="senhaRH" placeholder="Digite sua senha" onkeydown="verificarTeclaEnter(event)">
+                    </div>
+
+                    <button class="btn-login" onclick="autenticarRH()">Entrar</button>
+                </div>
+            </div>
+
+            <div id="rh-dashboard-box" style="display: none;">
+                <h2 class="page-title-outside centered">Quadro de Servidores - RH</h2>
+                
+                <div class="table-container">
+                    <div class="filter-wrapper-single">
+                        <input type="text" id="rhSearchInput" class="search-input-single" placeholder="Pesquise por múltiplos termos separados por vírgula (Ex: cuidador, efetivo)" onkeyup="filtrarServidores()">
+                        <button class="btn-clear-filter" onclick="limparFiltroRH()">Limpar Filtro</button>
+                    </div>
+
+                    <div id="rhCounter" class="rh-counter">Total encontrado: 0 registros</div>
+
+                    <div style="overflow-x: auto;">
+                        <table id="tabelaServidores">
+                            <thead>
+                                <tr>
+                                    <th>UND.</th>
+                                    <th>SERVIDOR(A)</th>
+                                    <th>VÍNCULO</th>
+                                    <th>MATRÍCULA</th>
+                                    <th>CARGO</th>
+                                    <th>ADMISSÃO</th>
+                                    <th>FUNÇÃO</th>
+                                    <th>TURNO</th>
+                                    <th>INÍCIO</th>
+                                    <th>CH</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="back-container">
+                <button class="btn-back" onclick="showPage('home')">Voltar para Início</button>
+            </div>
+        </section>
+
+        <section id="conselhos" class="page">
+            <h2 class="page-title-outside centered">Conselhos Ativos</h2>
+            <div class="conselhos-container">
+                
+                <div class="conselho-box">
+                    <h3>Conselho Municipal de Educação (CME)</h3>
+                    <p><strong>Presidente</strong> - IELDA RAIANA SANTOS DE SOUZA</p>
+                    <p><strong>Vice-Presidente</strong> - ELIANE FÉLIX DOS SANTOS OLIVEIRA</p>
+                    <p><strong>Secretária</strong> - ANA VITÓRIA FERREIRA DA SILVA</p>
+                </div>
+
+                <div class="conselho-box">
+                    <h3>Conselho de Alimentação Escolar (CAE)</h3>
+                    <p><strong>Presidente</strong> - JANAINA ARAÚJO LIMA SOARES</p>
+                    <p><strong>Vice-Presidente</strong> - FRANCISCO HUANDSON DA SILVA</p>
+                    <p><strong>Secretária</strong> - FRANCISCA BRUNA DOS SANTOS IVO COSTA</p>
+                </div>
+
+                <div class="conselho-box">
+                    <h3>Conselho de Acompanhamento e Controle Social do FUNDEB (CACS-FUNDEB)</h3>
+                    <p><strong>Presidente</strong> - DANDARA VIRGINIA MACHADO VIEIRA</p>
+                    <p><strong>Vice-Presidente</strong> - MARIA RIVANDA IDALINO SANTANA</p>
+                    <p><strong>Secretária</strong> - JAILMA LIMA DE OLIVEIRA</p>
+                </div>
+
+            </div>
+            <div class="back-container">
+                <button class="btn-back" onclick="showPage('home')">Voltar para Início</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-box">
+                <p><strong>Endereço:</strong></p>
+                <p>Rua Samuel Menezes Furtado, S/N, 25 de Janeiro - Cuité / PB<br>CEP: 58175-000</p>
+            </div>
+            <div class="footer-box">
+                <p><strong>E-mail:</strong></p>
+                <p><a href="mailto:sme@cuite.pb.gov.br">sme@cuite.pb.gov.br</a></p>
+                <p style="margin-top: 15px;"><strong>Instagram:</strong></p>
+                <p><a href="https://www.instagram.com/smecuite/" target="_blank">https://www.instagram.com/smecuite/</a></p>
+            </div>
+            <div class="footer-box">
+                <p><strong>Expediente:</strong></p>
+                <p>Segunda-feira: 08h às 12h e 14h às 18h (Aberto ao Público)</p>
+                <p>Terça-feira a Quinta-feira: 08h às 12h (Aberto ao Público) e 14h às 18h (Expediente interno)</p>
+                <p>Sexta-Feira: 08h às 14h (Aberto ao Público)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const dadosEscolas = [
+            ["25101350","Creche Municipal Diomedes Lucas de Carvalho","Rua Colina da Lagoa, S/N, São José","Urbana"],
+            ["25149016","Creche Municipal Giolice Gomes de Farias","Sítio Serra do Bombocadinho","Rural"],
+            ["25101379","Creche Municipal Josefa Bezerra de Souto","Distrito do Melo","Rural"],
+            ["25135155","Creche Municipal Manuel Soares da Costa","Rua da Aliança, Nº 565, Antônio Mariz","Urbana"],
+            ["25149008","Creche Municipal Maria Anita Coelho Furtado","Assentamento Retiro dos Simões","Rural"],
+            ["25128183","Creche Municipal Maria Cleonice Ramos de Sena","Rua 7 de Setembro, S/N, São Vicente","Urbana"],
+            ["25055828","Creche Municipal Maria Marinete Fialho Furtado","Rua José Cordeiro, S/N, 25 de Janeiro","Urbana"],
+            ["25056069","EMEF Antero Ferreira","Sítio Catolé","Rural"],
+            ["25056093","EMEF Benedito Venâncio dos Santos","Rua da Aliança, Nº 379, Jaime Pereira","Urbana"],
+            ["25056387","EMEF Celina de Lima Montenegro","Rua Manuel Casado Nobre, N° 417, São José","Urbana"],
+            ["25056573","EMEF Domiciano de Queiroz","Distrito do Melo","Rural"],
+            ["25056115","EMEF Elça Carvalho da Fonsêca","Rua José Cassimiro Dantas N° 247, Centro","Urbana"],
+            ["25056395","EMEF Eudócia Alves dos Santos","Rua Marcelino Fialho, S/N, 25 de Janeiro","Urbana"],
+            ["25056140","EMEF Francisca Simões","Assentamento Retiro dos Simões","Rural"],
+            ["25056484","EMEF Henrique Pereira dos Reis","Sítio Serra do Bombocadinho","Rural"],
+            ["25056506","EMEF Jácio Furtado","Sítio Muralhas","Rural"],
+            ["25056247","EMEF Julieta de Lima e Costa","Rua Aurino Venâncio da Fonseca, Nº 21, Das Graças","Urbana"],
+            ["25055968","EMEF Manoel Soares de Maria","Sítio Serra do Bombocadinho","Rural"],
+            ["25056425","EMEF Maria Camélia Pessoa da Costa","Rua Gilcele Gomes, S/N, Jardim Planalto","Urbana"],
+            ["25056344","EMEF Nailde Medeiros","Sítio Bujarí","Rural"],
+            ["25056409","EMEF Terezinha Gomes de Andrade","Sítio Espinheiro","Rural"]
+        ];
+
+        const dadosIdebEscolas = [
+            ["EMEF Benedito Venâncio dos Santos","Urbana","Anos Iniciais","x","6,9","6,4","6,6","6,2","5,8"],
+            ["EMEF Celina de Lima Montenegro","Urbana","Anos Iniciais","x","5,6","6,6","4,8","5,2","5,7"],
+            ["EMEF Eudócia Alves dos Santos","Urbana","Anos Iniciais","x","6,2","5,9","6,4","6,5","5,9"],
+            ["EMEF Francisca Simões","Rural","Anos Iniciais","x","6,1","4,7","5,3","4,5","x"],
+            ["EMEF Manoel Soares de Maria","Rural","Anos Iniciais","x","5,5","4,8","5,1","4,8","4,4"],
+            ["EMEF Maria Camélia Pessoa da Costa","Urbana","Anos Iniciais","x","6,2","5,1","5,7","5,2","5,8"],
+            ["EMEF Elça Carvalho da Fonsêca","Urbana","Anos Finais","x","5,4","4,6","4,4","3,7","3,4"],
+            ["EMEF Julieta de Lima e Costa","Urbana","Anos Finais","x","5,0","x","3,6","x","3,9"]
+        ];
+
+        const dadosServidores = [
+        ["ELC","ALEXANDRA DE SOUSA FLORA","EFETIVO","E19199","PROFESSOR PAA3","09/11/2010","PROFESSOR(A) - AEE","INTEGRAL","02/02/2026","30"],
+["ELC","ARETHUSA ANGRE DO REGO ANTERO","EFETIVO","E19198","PROFESSOR PAA4","06/11/2010","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["ELC","BOSOERG PEREIRA DA SILVA","CONTRATO","2026ELC01","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - FINAIS","TARDE","02/02/2026","30"],
+["ELC","CARLA JEANE SILVA FERREIRA E COSTA","EFETIVO","E20025","PROFESSOR PBB3","16/02/2012","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["ELC","CARLOS ANTONIO MEDEIROS COSTA","EFETIVO","E20010","PROFESSOR PBB2","15/03/2002","PROFESSOR(A) - FINAIS","MANHÃ","02/02/2026","30"],
+["ELC","DAVI MARQUES DA SILVA","EFETIVO","E20013","PROFESSOR PBB2","29/03/2000","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["ELC","DIOGO RAMON FONSECA DE OLIVEIRA","CONTRATO","2026ELC02","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["ELC","DUILIS ALVES DA COSTA","EFETIVO","E19065","PROFESSOR PAA2","07/04/1998","PROFESSOR(A) - EJA - III / IV","NOITE","02/02/2026","30"],
+["ELC","EDJAKSON TADEU COSTA ALVES","EFETIVO","E19135","PROFESSOR PAA2","31/03/2000","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["ELC","ELIEL FERREIRA SOARES","EFETIVO","E19047","PROFESSOR PAA2","08/07/1994","PROFESSOR(A) - FINAIS","TARDE","02/02/2026","30"],
+["ELC","ERIKA PATRICIA DE ALMEIDA MEDEIROS","EFETIVO","E19099","PROFESSOR PAA3","09/04/1998","PROFESSOR(A) - FINAIS","MANHÃ","02/02/2026","30"],
+["ELC","FRANCISCO ELENILSON DOS SANTOS FURTADO","EFETIVO","E19046","PROFESSOR PAA3","07/04/1998","PROFESSOR(A) - FINAIS","TARDE","02/02/2026","30"],
+["ELC","FRANCISCO JUNIOR CANDIDO DE ARAUJO","EFETIVO","E19177","PROFESSOR PAA3","07/11/2008","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["ELC","GERUZA MIGUEL SOARES","EFETIVO","E19162","PROFESSOR PAA3","14/11/2003","PROFESSOR(A) - FINAIS","MANHÃ","02/02/2026","30"],
+["ELC","JOAB OLIVEIRA SILVA","CONTRATO","2026ELC03","PORTEIRO-CTR","02/02/2026","PORTEIRO","INTEGRAL","02/02/2026","40"],
+["ELC","JOSE KARLOS EDUARDO SANTOS FERREIRA","CONTRATO","2026ELC04","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["ELC","JOSE NILTON DE MACEDO SANTOS","CONTRATO","2026ELC05","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - EJA - I / II","NOITE","02/02/2026","30"],
+["ELC","JOSE TARCISIO DE AZEVEDO SALES","EFETIVO","E19125","PROFESSOR PAA3","13/04/1998","PROFESSOR(A) - FINAIS","TARDE","02/02/2026","30"],
+["ELC","JOSE WELLINGTON CANDIDO DOS SANTOS","EFETIVO","E20021","PROFESSOR PBB1","14/11/2008","PROFESSOR(A) - FINAIS","MANHÃ","02/02/2026","30"],
+["ELC","JOSEFA GIRLENE PONTES MEDEIROS","CONTRATO","2026ELC06","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - EJA - III / IV","NOITE","02/02/2026","30"],
+["ELC","JOSEMARIA DE MOURA COSTA","EFETIVO","E19113","PROFESSOR PAA3","27/03/2000","PROFESSOR(A) - FINAIS","MANHÃ","02/02/2026","20"],
+["ELC","KALINE SOUZA SILVA","COMISSÃO","VIC2026ELC","ADMINISTRADOR ESCOLAR ADJUNTO","19/01/2024","DIRETOR(A) ESCOLAR ADJUNTO","INTEGRAL","02/02/2026","40"],
+["ELC","LEANDRO FERREIRA DA ROCHA","COMISSÃO","DIR2026ELC","ADMINISTRADOR ESCOLAR","19/01/2024","DIRETOR(A) ESCOLAR","INTEGRAL","02/02/2026","40"],
+["ELC","LUCIANO LUNA GOROROBA","EFETIVO","E20011","PROFESSOR PBB2","29/11/2002","PROFESSOR(A) - FINAIS","TARDE","02/02/2026","30"],
+["ELC","LUCICLEIA LIMA DE SOUZA","CONTRATO","2026ELC07","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - FINAIS","MANHÃ","02/02/2026","30"],
+["ELC","MARIA CRISPIM DA SILVA SOBRINHO","CONTRATO","2026ELC08","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - EJA - I / II","NOITE","02/02/2026","30"],
+["ELC","NILDA GUEDES VASCONCELOS","CONTRATO","2026ELC09","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["ELC","NICILEIDE OLIVEIRA FERREIRA MENDONCA","EFETIVO","E20014","PROFESSOR PBB2","03/11/2008","PROFESSOR(A) - REFORÇO","INTEGRAL","02/02/2026","30"],
+["ELC","PAULO RICARDO SANTOS MACEDO","CONTRATO","2026ELC10","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["ELC","NOELIA MARIA DE MEDEIROS","EFETIVO","E19183","PROFESSOR PAA3","04/11/2008","PROFESSOR(A) - FINAIS","MANHÃ","02/02/2026","30"],
+["ELC","PABLO RENAN DOS SANTOS LIMA","COMISSÃO","2026ELC11","SECRETÁRIO(A) ESCOLAR","18/05/2023","SECRETÁRIO(A) ESCOLAR","INTEGRAL","02/02/2026","40"],
+["ELC","VICTOR DA ROCHA SILVA JUNIOR","CONTRATO","2026ELC12","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - FINAIS","MANHÃ","02/02/2026","30"],
+["ELC","RAFAELA BARBOSA DA SILVA","COMISSÃO","ADJ2026ELC","ADMINISTRADOR ESCOLAR ADJUNTO","19/01/2024","DIRETOR(A) ESCOLAR ADJUNTO","INTEGRAL","02/02/2026","40"],
+["ELC","ROSANGELA BARBOSA DA SILVA SANTOS","EFETIVO","E20027","PROFESSOR PBB2","04/03/2015","SUPERVISOR(A) EDUCACIONAL","INTEGRAL","02/02/2026","30"],
+["ELC","SANDRA MARIA FURTADO DA SILVA","EFETIVO","E20017","PROFESSOR PBB2","03/11/2008","PROFESSOR(A) - FINAIS","MANHÃ","02/02/2026","30"],
+["ELC","UIRA LUIS DE VASCONCELOS LEAL","EFETIVO","E20031","PROFESSOR PBB2","23/03/2021","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["ELC","VALDECI FONTES DE SOUSA","EFETIVO","E20026","PROFESSOR PBB4","06/08/2012","PROFESSOR(A) - FINAIS","MANHÃ","02/02/2026","30"],
+["ELC","MARIA CLARA ASFORA DE AZEVEDO","CONTRATO","2026ELC19","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","TARDE","02/02/2026","20"],
+["ELC","LAYANY ANDREZZA FAGUNDES CAVALCANTI","CONTRATO","2026ELC13","CUIDADOR(A)","01/03/2026","CUIDADOR(A)","TARDE","02/02/2026","20"],
+["ELC","TAISSA DE OLIVEIRA DOS SANTOS","CONTRATO","2026ELC13","AUXILIAR DE SERVICOS GERAIS-CT","02/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["ELC","MARCIO SILVA DE LIMA","CONTRATO","2026ELC22","PROFESSOR DE MÚSICA","02/02/2026","PROFESSOR DE MÚSICA","INTEGRAL","02/02/2026","10"],
+["ELC","BARTIRA NUNES VENÂNCIO DOS SANTOS","EFETIVO","E-------","RECEPCIONISTA","03/07/2012","ASSISTENTE ADMINISTRATIVO","INTEGRAL","02/02/2026","20"],
+["ELC","THEO ALEX SOUZA DOS SANTOS","CONTRATO","2026ELC20","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["ELC","ANDERSON GILMAR PAZ OLIVEIRA","EFETIVO","E46017 ","MERENDEIRO(A)/COZINHEIRO(A)","01/11/2021","MERENDEIRO(A)/COZINHEIRO(A)","INTEGRAL","02/02/2026","40"],
+["ELC","HERICSON RIAN DA SILVA COSTA","CONTRATO","2026ELC14","AUXILIAR DE SERVICOS GERAIS-CT","03/02/2025","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["ELC","MARIA SARA GOMES SOUZA","CONTRATO","2026ELC15","AUXILIAR DE MONITOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["ELC","JUCELIA FERREIRA DOS SANTOS SILVA","EFETIVO","E02193","AUXILIAR DE SERVIÇOS GERAIS","17/05/2011","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["ELC","SABRINA KETTLEN MACÊDO SILVA","CONTRATO","2026ELC21","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","MANHÃ","02/02/2026","20"],
+["ELC","EDIVANIA DA SILVA COSTA","EFETIVO","E02205","AUXILIAR DE SERVIÇOS GERAIS","01/04/2015","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["ELC","MANUEL DE ARAUJO BARBOSA","CONTRATO","2026ELC16","AUXILIAR DE SERVICOS GERAIS-CT","02/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["ELC","GEANE PONTES DA SILVA","CONTRATO","2026ELC17","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - AEE","INTEGRAL","02/02/2026","30"],
+["ELC","THAISE PRISCILLA BEZERRA DA SILVA","EFETIVO","E20023","PROFESSOR PBB2","17/05/2011","PROFESSOR(A) - FINAIS","TARDE","02/02/2026","30"],
+["ELC","ANTONIO BORGES JUNIOR","EFETIVO","F09009","VIGILANTE","18/12/2008","PROFESSOR(A) - EJA - III / IV","NOITE","02/02/2026","30"],
+["ELC","MARIA EDUARDA DE SOUTO SILVA","CONTRATO","2026ELC18","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["EUD","ADLLA RAIANE SANTOS DANTAS","CONTRATO","2026EUD01","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["EUD","ADRIANA DA SILVA OLIVEIRA BRITO","CONTRATO","2026EUD02","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["EUD","ADRIANA SUZIA DA SILVA SANTOS","EFETIVO","E19201","PROFESSOR PAA3","16/10/2011","PROFESSOR(A) - REFORÇO","TARDE","28/02/2025","30"],
+["EUD","ALANE MARIA NÓBREGA SILVA","CONTRATO","2026EUD03","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["EUD","ALINE SAYARA DE AZEVEDO SOUTO","CONTRATO","2026EUD04","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["EUD","ANDREA AMORIM DA SILVA","CONTRATO","2026EUD29","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - AEE","MANHÃ","04/05/2026","30"],
+["EUD","CARINA SUÊNIA OLIVEIRA DA SILVA","EFETIVO","F45002","COPEIRO(A)","17/05/2011","PROFESSOR(A) - INF PRÉ I / II","TARDE","01/07/2013","30"],
+["EUD","CARLOS HENRIQUE MOTA COSTA FERNANDES DA SILVA","EFETIVO","E19210","PROFESSOR PAA3","15/04/2021","PROFESSOR(A) - INICIAIS","MANHÃ","15/04/2021","30"],
+["EUD","CLAUDJAN SANTOS DA SILVA","EFETIVO","E20016","PROFESSOR PBB3","03/11/2008","PROFESSOR(A) - FINAIS","INTEGRAL","02/02/2026","30"],
+["EUD","DINARTE DIAS DA SILVA","EFETIVO","E02076","AUXILIAR DE SERVIÇOS GERAIS","07/04/1998","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","22/01/2025","40"],
+["EUD","ELIZABETH SAMANTHA CAVALCANTE DE MEDEIROS","CONTRATO","2026EUD05","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["EUD","EMMANUELE FERREIRA SILVA","CONTRATO","2026EUD06","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["EUD","ERIKA EMANUELLE DE OLIVEIRA","EFETIVO","E19173","PROFESSOR PAA3","20/10/2008","PROFESSOR(A) - INF PRÉ I / II","TARDE","01/02/2024","30"],
+["EUD","FRANCISCA BRUNA DOS SANTOS IVO COSTA","CONTRATO","2026EUD07","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["EUD","FRANCISCO DE ASSIS FERREIRA LIMA","EFETIVO","E02210","AUXILIAR DE SERVIÇOS GERAIS","01/11/2021","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","24/10/2022","40"],
+["EUD","FRANCISCO VERIDIANO LIMA GOMES","EFETIVO","E02083","AUXILIAR DE SERVIÇOS GERAIS","07/04/1998","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","08/05/2006","40"],
+["EUD","GENIVALDO DE ARAÚJO SANTOS","EFETIVO","E02080","AUXILIAR DE SERVIÇOS GERAIS","07/04/1998","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","01/02/2017","40"],
+["EUD","GEOVANILDA DE MACEDO MACHADO SALES","EFETIVO","E19154","PROFESSOR PAA2","07/11/2001","PROFESSOR(A) - INICIAIS","MANHÃ","01/03/2012","30"],
+["EUD","GILDENE MARIA DOS SANTOS","CONTRATO","2026EUD08","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["EUD","JAQUELINE GOMES MOREIRA","CONTRATO","2026EUD31","AUXILIAR DE SERVICOS GERAIS-CT","13/05/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","13/05/2026","40"],
+["EUD","JENNYFER DAUANY SILVA SANTOS","CONTRATO","2025EUD01","CUIDADOR(A)","03/02/2025","CUIDADOR(A)","INTEGRAL","03/02/2025","40"],
+["EUD","JOIS FERNANDES DANTAS","CONTRATO","2026EUD09","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["EUD","JOSE SANDRO DE ARAUJO MEDEIROS","EFETIVO","E19083","PROFESSOR PAA2","07/04/1998","PROFESSOR(A) - REFORÇO","TARDE","02/01/2019","30"],
+["EUD","JOSEFA CRISLANE SILVA","CONTRATO","2026EUD10","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","INTEGRAL","02/02/2026","30"],
+["EUD","JOSEFA HOSANA SOUTO COSTA","CONTRATO","2026EUD11","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["EUD","JOSEFA ROSÂNGELA DA SILVA SOUZA","EFETIVO","E02107","AUXILIAR DE SERVIÇOS GERAIS","07/04/1998","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","22/01/2026","40"],
+["EUD","JOSELMA DE MELO COSTA","CONTRATO","2026EUD12","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["EUD","JOSINEIDE FERREIRA DOS SANTOS LIMA","EFETIVO","B03006","ASSISTENTE ADMINISTRATIVO","05/03/1982","SECRETÁRIO(A) ESCOLAR","INTEGRAL","22/01/2025","40"],
+["EUD","KALIGIA PEREIRA RODRIGUES","CONTRATO","2026EUD13","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INF PRÉ I / II","INTEGRAL","02/02/2026","40"],
+["EUD","LAIZA EMILLY DE LIMA SANTOS","CONTRATO","2026EUD27","CUIDADOR(A)","01/03/2026","AUXILIAR DE SALA","TARDE","01/03/2026","30"],
+["EUD","LEIDJANE MATIAS DA COSTA","CONTRATO","2026EUD26","CUIDADOR(A)","01/03/2026","CUIDADOR(A)","INTEGRAL","25/02/2026","40"],
+["EUD","LÍVIA JORDANA DE MEDEIROS MEIRA","CONTRATO","2026EUD23","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","04/02/2026","40"],
+["EUD","LUANA AGOSTINHO COÊLHO","EFETIVO","E46006","MERENDEIRA","01/07/2011","MERENDEIRO(A)/COZINHEIRO(A)","INTEGRAL","02/01/2019","40"],
+["EUD","LUANA NAIR GOMES COSTA","CONTRATO","2026EUD14","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","TARDE","02/02/2026","20"],
+["EUD","MACICLEIDE DA COSTA DANTAS LIMA","EFETIVO","E38006","SUPERVISOR(A) EDUCACIONAL","17/11/2008","SUPERVISOR(A) EDUCACIONAL","MANHÃ","17/02/2010","30"],
+["EUD","MARIA ALICE GOMES ALBUQUERQUE DE LIMA","CONTRATO","2026EUD15","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["EUD","MARIA CILENE CRISPIM GONÇALVES","EFETIVO","BARRA","PROFESSOR - PERMUTA","11/06/2006","PROFESSOR(A) - INICIAIS","TARDE","05/02/2025","30"],
+["EUD","MARIA CRISLAINE ALVES DE MELO","EFETIVO","E60002","CUIDADOR(A)","24/02/2021","PROFESSOR(A) - AEE","TARDE","02/02/2026","30"],
+["EUD","MARIA DAS MERCÊS GOMES DA SILVA","EFETIVO","E02084","AUXILIAR DE SERVICOS GERAIS","07/04/1998","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","01/07/2020","40"],
+["EUD","MARIA DE LOURDES SOUSA SILVA","CONTRATO","2026EUD16","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["EUD","MARIA EDUARDA DOS SANTOS FERNANDES","CONTRATO","2026EUD25","CUIDADOR(A)","01/03/2026","CUIDADOR(A)","INTEGRAL","19/02/2026","40"],
+["EUD","MARIA LÚCIA OLIVEIRA DE ALMEIDA","EFETIVO","E02082","AUXILIAR DE SERVIÇOS GERAIS","07/04/1998","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","30/03/2004","40"],
+["EUD","MARINETE ARAÚJO DOS SANTOS","COMISSÃO","DIR2026EUD","DIRETOR(A) ESCOLAR","19/01/2024","DIRETOR(A) ESCOLAR","TARDE","19/01/2024","30"],
+["EUD","MICHELLY RAIANE DA SILVA MACEDO","CONTRATO","2026EUD17","CUIDADOR(A)","02/02/2026","AUXILIAR DE SALA","INTEGRAL","02/02/2026","40"],
+["EUD","PATRICIA SOUZA DA SILVA","CONTRATO","2026EUD18","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["EUD","RALINE DOS SANTOS GOMES","COMISSÃO","2026EUD30","SECRETÁRIO(A) ESCOLAR","06/04/2026","SECRETÁRIO(A) ESCOLAR","INTEGRAL","06/04/2026","40"],
+["EUD","ROBERTA JACQUELINE SARAIVA AZEVEDO","EFETIVO","E19207","PROFESSOR PAA3","23/03/2021","PROFESSOR(A) - INICIAIS","TARDE","23/03/2021","30"],
+["EUD","ROSA PEREIRA COSTA","CONTRATO","2026EUD24","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","04/02/2026","40"],
+["EUD","ROSELANDIA SANTOS COSTA SOUTO","CONTRATO","2026EUD20","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INF PRÉ I / II","INTEGRAL","02/02/2026","30"],
+["EUD","ROSÉLIA DOS SANTOS SILVA","CONTRATO","2026EUD19","AUXILIAR DE SERVICOS GERAIS-CT","02/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["EUD","ROSICLEIDE CREMILDA SILVA DE MEDEIROS","CONTRATO","2026EUD21","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["EUD","SANDRA DE ARAUJO FERREIRA VENANCIO","EFETIVO","E19070","PROFESSOR PAA3","07/04/1998","PROFESSOR(A) - REFORÇO","MANHÃ","01/02/2023","30"],
+["EUD","SIMÁRIA PATRÍCIA DOS SANTOS TEIXEIRA","CONTRATO","2026EUD22","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INF PRÉ I / II","MANHÃ","02/02/2026","30"],
+["EUD","TAISSA DE OLIVEIRA DOS SANTOS","CONTRATO","2026EUD28","AUXILIAR DE SERVICOS GERAIS-CT","02/02/2026","CUIDADOR(A)","INTEGRAL","06/04/2026","40"],
+["EUD","TERESA CRISTINA CARDOSO FERREIRA","EFETIVO","E19189","PROFESSOR PA","12/11/2008","PROFESSOR(A) - INF PRÉ I / II","MANHÃ","01/08/2018","30"],
+["BEN","ADRIANA SOUZA COSTA","CONTRATO","2026BEN01","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["BEN","ALBERTÂNIA DOS SANTOS SILVA","COMISSÃO","VIC2024BEN","DIRETOR(A) ESCOLAR ADJUNTO","19/01/2024","DIRETOR(A) ESCOLAR ADJUNTO","INTEGRAL","19/01/2024","40"],
+["BEN","ALICIA SILVA OLIVEIRA","CONTRATO","2026BEN02","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["BEN","ALINE GONÇALVES SANTOS","CONTRATO","2026BEN03","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INF PRÉ I / II","TARDE","02/02/2026","30"],
+["BEN","ANA PAULA DE SOUTO NASCIMENTO","CONTRATO","2026BEN04","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["BEN","CLEONEIDE CÂNDIDO DOS SANTOS PONTES","EFETIVO/COMISSÃO","E19118","PROFESSOR PAA3","01/03/2000","DIRETOR(A) ESCOLAR","INTEGRAL","19/01/2024","40"],
+["BEN","CRISTIANE DE SOUSA LIMA","CONTRATO","2026BEN05","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["BEN","DANIELLE CRISTINA DA SILVA OLIVEIRA","CONTRATO","2026BEN06","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","06/02/2026","40"],
+["BEN","DANIELLE DE LIMA PIMENTA","CONTRATO","2026BEN19","CUIDADOR(A)","09/02/2026","CUIDADOR(A)","INTEGRAL","09/02/2026","40"],
+["BEN","DAYARA DOS SANTOS FREITAS","CONTRATO","2026BEN20","CUIDADOR(A)","09/02/2026","CUIDADOR(A)","INTEGRAL","09/02/2026","40"],
+["BEN","EDNA DE OLIVEIRA SILVA","EFETIVO","E19152","PROFESSOR PAA3","02/04/2001","PROFESSOR(A) - AEE","TARDE","02/02/2026","30"],
+["BEN","EDYLENE ALMEIDA CAVALCANTI","CONTRATO","2026BEN22","AUXILIAR DE SERVIÇOS GERAIS","19/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","19/02/2026","40"],
+["BEN","ELEN LAIS SANTOS SILVA","CONTRATO","2026BEN07","AUXILIAR DE SERVIÇOS GERAIS","02/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["BEN","ERINEIDE DA SILVA SANTOS","EFETIVO","F02008","AUXILIAR DE SERVIÇOS GERAIS","09/04/1998","CUIDADOR(A)","INTEGRAL","30/01/2026","40"],
+["BEN","FABIANA MERCÊS SANTOS SILVA","CONTRATO","2026BEN21","AUXILIAR DE SERVIÇOS GERAIS","09/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","09/02/2026","40"],
+["BEN","HONORINA HELENA SANTOS FURTADO","EFETIVO","E19159","PROFESSOR PAA3","10/11/2003","PROFESSOR(A) - REFORÇO","TARDE","02/02/2026","30"],
+["BEN","IRANELMA PINTO DA SILVA","CONTRATO","2026BEN08","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["BEN","ISABELLA BATISTA DE MEDEIROS","CONTRATO","2026BEN09","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["BEN","JOACILMA DE MEDEIROS DIAS","EFETIVO","E19179","PROFESSOR PAA3","04/11/2008","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["BEN","JOÃO CRISPIM DA SILVA NETO","EFETIVO","E19040","PROFESSOR PAA3","10/10/1994","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["BEN","JORDÃO SOUSA PONTES","CONTRATO","2025BEN03","VIGILANTE","01/12/2025","VIGILANTE","NOITE","01/12/2025","40"],
+["BEN","JOSÉ APARECIDO DA SILVA ROCHA","CONTRATO","2025BEN02","SUPERVISOR(A) EDUCACIONAL","01/05/2025","SUPERVISOR(A) EDUCACIONAL","INTEGRAL","01/05/2025","40"],
+["BEN","JOSEANE LIMA FAUSTINO","CONTRATO","2026BEN10","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INF PRÉ I / II","MANHÃ","02/02/2026","30"],
+["BEN","KISLA CLISMÉNIA FERREIRA CÂNDIDO ANDRADE","CONTRATO","2026BEN11","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["BEN","LAÍS MERCÊS SANTOS DINIZ","CONTRATO","2026BEN12","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["BEN","LARISSY DOS SANTOS SILVA","CONTRATO","2026BEN13","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["BEN","LEANDRO PATRICIO DE OLIVEIRA SANTOS","EFETIVO","D61001","SERVENTE DE OBRAS","02/05/2012","PORTEIRO","INTEGRAL","30/01/2017","40"],
+["BEN","MARIA DA SILVA","EFETIVO","E19153","PROFESSOR PAA3","03/08/2001","PROFESSOR(A) - REFORÇO","TARDE","02/02/2026","30"],
+["BEN","MARIA DAS VITORIA DOS SANTOS","EFETIVO","E19104","PROFESSOR PAA3","22/02/1999","PROFESSOR(A) - REFORÇO","MANHÃ","02/02/2026","30"],
+["BEN","MARIA DE FÁTIMA SOARES DOS SANTOS","CONTRATO","2026BEN14","COZINHEIRO(A)-CTR","02/02/2026","MERENDEIRO(A)/COZINHEIRO(A)","INTEGRAL","02/02/2026","40"],
+["BEN","MARIA DILMA MIRANDA FONSECA","CONTRATO","2026BEN15","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INF PRÉ I / II","MANHÃ","02/02/2026","30"],
+["BEN","MARIA JOSÉ DOS SANTOS SILVA","EFETIVO","E19182","PROFESSOR PAA3","05/11/2008","PROFESSOR(A) - AEE","MANHÃ","02/02/2026","30"],
+["BEN","MARIA JOSÉ TERTULIANO DE SOUZA ANDRADE","EFETIVO","E19188","PROFESSOR PAA2","18/11/2008","SUPERVISOR(A) EDUCACIONAL","INTEGRAL","06/03/2023","30"],
+["BEN","MIROSMAR JOSÉ MOREIRA DA SILVA","EFETIVO","E02206","AUXILIAR DE SERVIÇOS GERAIS","08/09/2021","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","22/01/2026","40"],
+["BEN","ODAIZE OHANNA DA COSTA AZEVEDO","COMISSÃO","2025BEN01","SECRETÁRIO(A) ESCOLAR","24/01/2025","SECRETÁRIO(A) ESCOLAR","INTEGRAL","24/01/2025","40"],
+["BEN","RAFAELLE NAYANE FERREIRA FONSÊCA","CONTRATO","2026BEN16","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INF PRÉ I / II","TARDE","02/02/2026","30"],
+["BEN","RAKEL SANTOS AZEVÊDO","CONTRATO","2026BEN17","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["BEN","RAQUEL DOS SANTOS FERNANDES","CONTRATO","2026BEN23","CUIDADOR(A)","19/02/2026","CUIDADOR(A)","INTEGRAL","19/02/2026","40"],
+["BEN","SILVANEIDE NASCIMENTO DOS SANTOS","EFETIVO","E02152","AUXILIAR DE SERVIÇOS GERAIS","04/05/1998","MERENDEIRO(A)/COZINHEIRO(A)","INTEGRAL","01/02/2016","40"],
+["BEN","VALDINÉIA TAVARES DA SILVA","EFETIVO","E19136","PROFESSOR PAA3","31/03/2000","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["BEN","ZENILDA DE ARAÚJO FONTES","CONTRATO","2026BEN18","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["CAM","ADÍSIO PEREIRA FIALHO","EFETIVO","E19134","PROFESSOR PAA3","31/03/2000","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["CAM","ADNA DAIANE DE LIMA DIAS","EFETIVO","E19206","PROFESSOR PAA3","23/03/2021","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["CAM","CÍCERA DOS SANTOS SILVA","EFETIVO/COMISSÃO","E19184","PROFESSOR PAA3","04/11/2008","DIRETOR(A) ESCOLAR","INTEGRAL","19/01/2024","40"],
+["CAM","CLEONES AECIO LIRA DE FARIAS","EFETIVO","E19160","PROFESSOR PAA4","10/11/2003","PROFESSOR(A) - EJA - III / IV","NOITE","02/02/2026","25"],
+["CAM","DAIANE DE LIMA SILVA","CONTRATO","2026CAM08","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CAM","DANIELE OLIVEIRA FIDELES","CONTRATO","2026CAM13","AUXILIAR DE SERVIÇOS GERAIS","02/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["CAM","DANÚZIA ZENAIDE SANTOS FERREIRA","CONTRATO","2026CAM01","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["CAM","DENYS RIBEIRO SILVA","EFETIVO","G52002","MONITOR(A) DO SERV. CONVIVÊNCIA","05/07/2011","SECRETÁRIO(A) ESCOLAR","INTEGRAL","02/02/2026","40"],
+["CAM","DEOCLÉCIO DE MACEDO DANTAS","EFETIVO","E19165","PROFESSOR PAA3","03/11/2008","PROFESSOR(A) - EJA - III / IV","NOITE","02/02/2026","25"],
+["CAM","DJARDIEL DA SILVA GOMES","COMISSÃO","2025074","DIRETOR(A) ESCOLAR ADJUNTO","02/02/2026","DIRETOR(A) ESCOLAR ADJUNTO","INTEGRAL","02/02/2026","40"],
+["CAM","DULCINALDO ALVES DA COSTA","EFETIVO","E09022","VIGILANTE","05/04/2011","VIGILANTE","NOITE","05/04/2011","40"],
+["CAM","ELLOYSA SILVA NASCIMENTO","CONTRATO","2026CAM17","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CAM","ELUZE LOPES DA SILVA","EFETIVO","E38002","SUPERVISOR(A) EDUCACIONAL","09/04/1998","SUPERVISOR(A) EDUCACIONAL","INTEGRAL","02/02/2026","20"],
+["CAM","EVERTON SAMUEL OLIVEIRA SANTOS","CONTRATO","2026CAM20","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","19/05/2026","40"],
+["CAM","FABIULA NIEBLES DOS SANTOS","CONTRATO","2026CAM02","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["CAM","FRANCISCA CIBELE MARQUES GUEDES DE MACEDO","EFETIVO","E19180","PROFESSOR PAA1","03/11/2008","PROFESSOR(A) - AEE","MANHÃ","02/02/2026","20"],
+["CAM","FRANCISCA GILIANE SILVA ANDRADE","EFETIVO","E19202","PROFESSOR PAA3","06/02/2012","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["CAM","GERALDO TAVARES DE SOUTO","EFETIVO","E19167","PROFESSOR PAA3","13/04/1998","PROFESSOR(A) - EJA - I / II","NOITE","02/02/2026","25"],
+["CAM","GERCITÂNIA OLIVEIRA DA SILVA LIMA","EFETIVO","E19212","PROFESSOR PAA3","01/09/2024","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["CAM","GERLANE SILVA RAMOS","CONTRATO","2026CAM03","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INF PRÉ I / II","MANHÃ","02/02/2026","30"],
+["CAM","GILMÁRIA CASSIANO LOPES","EFETIVO","E02186","AUXILIAR DE SERVIÇOS GERAIS","12/06/2000","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","07/05/2023","40"],
+["CAM","IANNA RADHA FONSECA MARINHO","EFETIVO","E19209","PROFESSOR PAA3","23/03/2021","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["CAM","IGOR CARDOSO SILVA","CONTRATO","2026CAM15","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CAM","IVANILSA MACEDO SILVA","CONTRATO","2026CAM04","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INF PRÉ I / II","MANHÃ","02/02/2026","30"],
+["CAM","JAMILY DE SOUZA FLORA GUEDES","CONTRATO","2026CAM07","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["CAM","JEANNE DE OLIVEIRA SOUSA SILVA","CONTRATO","2026CAM12","AUXILIAR DE SERVIÇOS GERAIS","02/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["CAM","JOÃO PAULO DE ALMEIDA MEDEIROS","EFETIVO","E20024","PROFESSOR PBB3","17/05/2011","SUPERVISOR(A) EDUCACIONAL","INTEGRAL","01/02/2023","30"],
+["CAM","JOSÉ MOREIRA DE LIMA","EFETIVO","E02088","AUXILIAR DE SERVIÇOS GERAIS","07/04/1998","PORTEIRO","INTEGRAL","28/01/2008","40"],
+["CAM","JOSILDA DA SILVA ARAÚJO","CONTRATO","2026CAM05","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["CAM","KALINA DE OLIVEIRA SILVA","EFETIVO","E38008","SUPERVISOR(A) EDUCACIONAL","16/02/2012","SUPERVISOR(A) EDUCACIONAL","INTEGRAL","01/02/2017","40"],
+["CAM","LEONICE NUNES NASCIMENTO","CONTRATO","2026CAM14","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CAM","LUANA NASCIMENTO SILVA","CONTRATO","2026CAM10","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CAM","MARIA DO SOCORRO BRITO","CONTRATO","2026CAM06","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","MANHÃ","02/02/2026","30"],
+["CAM","MARIA EUDÊNIA SILVA COSTA","EFETIVO","E02201","AUXILIAR DE SERVIÇOS GERAIS","01/08/2012","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","28/01/2024","40"],
+["CAM","MARIA RIVANDA IDALINO SANTANA","EFETIVO","E46008","MERENDEIRO(A)/COZINHEIRO(A)","01/03/2012","PROFESSOR(A) - INF PRÉ I / II","TARDE","02/02/2026","30"],
+["CAM","MAURILIO DE MACEDO COSTA","EFETIVO","E19089 ","PROFESSOR PAA3","07/04/1998","PROFESSOR(A) - REFORÇO","TARDE","02/02/2026","30"],
+["CAM","NATASHA CÂNDIDO OLIVEIRA","CONTRATO","2026CAM18","CUIDADOR(A)","06/04/2026","CUIDADOR(A)","INTEGRAL","06/04/2026","40"],
+["CAM","NAYARA TRINDADE DE OLIVEIRA","EFETIVO","E37001","MONITOR(A) DE TRANSPORTE ESCOLAR","25/10/2021","SECRETÁRIO(A) ESCOLAR","INTEGRAL","26/01/2026","40"],
+["CAM","NILMA QUEIROZ DE LIMA","CONTRATO","2026CAM19","CUIDADOR(A)","09/04/2026","CUIDADOR(A)","INTEGRAL","09/04/2026","40"],
+["CAM","ROSICLEIDE DA SILVA","CONTRATO","2026CAM16","MERENDEIRO(A)/COZINHEIRO(A)","03/03/2026","MERENDEIRO(A)/COZINHEIRO(A)","INTEGRAL","03/03/2026","40"],
+["CAM","SANDRA RODRIGUES DOS SANTOS","EFETIVO","E60004","CUIDADOR(A)","25/10/2021","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+["CAM","SEBASTIANA ALVES DA SILVA","EFETIVO","E02094","AUXILIAR DE SERVIÇOS GERAIS","07/04/1998","MERENDEIRO(A)/COZINHEIRO(A)","INTEGRAL","06/05/2019","40"],
+["CAM","VIVIANNE BATISTA DE SOUZA","CONTRATO","2026CAM11","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CEL","EDILENE DE LIMA MEDEIROS","EFETIVO","E02101","AUXILIAR DE SERVICOS GERAIS-CT","07/04/1998","AUXILIAR DE BIBLIOTECA","INTEGRAL","28/01/2024","40"],
+["CEL","ROBSON DA ROCHA SANTOS","EFETIVO","E09005","VIGILANTE","13/04/1998","VIGILANTE","NOITE","13/04/1998","40"],
+["CEL","ZENICLEIDE TOMÉ DA SILVA","EFETIVO","E19131","PROFESSOR PAA4","30/03/2000","PROFESSOR(A) - AEE","MANHÃ","02/02/2026","30"],
+["CEL","FRANCISCA EVANILDA DA COSTA SILVA","CONTRATO","2025CEL01","AUXILIAR DE SERVICOS GERAIS","05/01/2025","MERENDEIRO(A)/COZINHEIRO(A)","INTEGRAL","02/02/2026","40"],
+["CEL","BRÍGIDA EMANUELLI SILVA SPINELLI","COMISSÃO","2025CEL02","SECRETÁRIO(A) ESCOLAR","28/01/2025","SECRETÁRIO(A) ESCOLAR","INTEGRAL","28/01/2026","40"],
+["CEL","JACIO DE OLIVEIRA LIMA","CONTRATO","2025CEL03","VIGILANTE","01/12/2025","PORTEIRO","INTEGRAL","02/02/2026","40"],
+["CEL","ALESSANDRA DOS SANTOS PONTES FONSÊCA","COMISSÃO","VIC2026CEL","ADMINISTRADOR ESCOLAR ADJUNTO","27/01/2026","DIRETOR(A) ESCOLAR ADJUNTO","INTEGRAL","27/01/2026","40"],
+["CEL","JANAINA ARAÚJO LIMA SOARES","COMISSÃO","DIR2026CEL","ADMINISTRADOR ESCOLAR","27/01/2026","DIRETOR(A) ESCOLAR","INTEGRAL","28/01/2026","40"],
+["CEL","ALICE SILVA DE ARAÚJO","CONTRATO","2026CEL01","AUXILIAR DE MONITOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CEL","ANA HOSANA DA SILVA","CONTRATO","2026CEL02","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","INTEGRAL","02/02/2026","30"],
+["CEL","CICERA DE MEDEIROS NASCIMENTO","CONTRATO","2026CEL03","COZINHEIRO(A)-CTR","02/02/2026","MERENDEIRO(A)/COZINHEIRO(A)","INTEGRAL","02/02/2026","40"],
+["CEL","CLAUDENILDA RAYANE DOS SANTOS ANTERO MEDEIROS","CONTRATO","2026CEL04","COZINHEIRO(A)-CTR","02/02/2026","MERENDEIRO(A)/COZINHEIRO(A)","INTEGRAL","02/02/2026","40"],
+["CEL","DAMIANA EMÍLIA DO NASCIMENTO","CONTRATO","2026CEL05","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","INTEGRAL","02/02/2026","30"],
+["CEL","DENISE ALEXANDRE DA SILVA","CONTRATO","2026CEL06","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","INTEGRAL","02/02/2026","30"],
+["CEL","ERIVALDO DA SILVA","CONTRATO","2026CEL07","AUXILIAR DE SERVICOS GERAIS","02/02/2026","INSPETOR DE ALUNOS","INTEGRAL","02/02/2026","40"],
+["CEL","GILMARA TAVARES DIAS","CONTRATO","2026CEL08","AUXILIAR DE SERVICOS GERAIS","02/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["CEL","JOÃO VICTOR DA FONSECA COSTA","CONTRATO","2026CEL09","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","INTEGRAL","02/02/2026","30"],
+["CEL","LAIZE TRAJANO MACÊDO","CONTRATO","2026CEL10","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","INTEGRAL","02/02/2026","30"],
+["CEL","LARA STEFANY SILVA ANDRADE","CONTRATO","2026CEL11","AUXILIAR DE MONITOR(A)","02/02/2026","PROFESSOR(A) - INICIAIS","INTEGRAL","02/02/2026","30"],
+["CEL","LAURA ALVES DE SOUSA","CONTRATO","2026CEL12","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CEL","LUANA DUARTE DE OLIVEIRA","CONTRATO","2026CEL13","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","INTEGRAL","02/02/2026","30"],
+["CEL","MARIA EDILZA PEREIRA DOS SANTOS","CONTRATO","2026CEL14","AUXILIAR DE SERVICOS GERAIS","02/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["CEL","MARIA HELLEN SANTOS DA SILVA","CONTRATO","2026CEL15","CUIDADOR(A)","02/02/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","02/02/2026","40"],
+["CEL","MICAIANE MEDEIROS DANTAS","CONTRATO","2026CEL16","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","INTEGRAL","02/02/2026","30"],
+["CEL","MIKAELA CANDIDO BALDOINO","CONTRATO","2026CEL17","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CEL","ROSENILDA DA SILVA GOMES","CONTRATO","2026CEL18","CUIDADOR(A)","02/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CEL","SARAH LARYSSA MARQUES ARAÚJO","CONTRATO","2026CEL19","SUPERVISOR EDUCACIONAL","02/02/2026","SUPERVISOR(A) EDUCACIONAL","INTEGRAL","02/02/2026","40"],
+["CEL","VANESSA DA SILVA OLIVEIRA","CONTRATO","2026CEL20","PROFESSOR PA-CTR","02/02/2026","PROFESSOR(A) - INICIAIS","INTEGRAL","02/02/2026","30"],
+["CEL","FRANCISCA DE PAULA SANTOS DE MORAIS","CONTRATO","2026CEL21","CUIDADOR(A)","03/02/2026","CUIDADOR(A)","INTEGRAL","02/02/2026","40"],
+["CEL","MARCOS EDUARDO VENÂNCIO CRUZ DOS SANTOS","CONTRATO","2026CEL22","AUXILIAR DE SERVICOS GERAIS","05/02/2026","CUIDADOR(A)","INTEGRAL","18/05/2026","40"],
+["CEL","EDZARLLA FREIRE RAMALHO","CONTRATO","2026CEL23","COZINHEIRO(A)-CTR","14/05/2026","AUXILIAR DE SERVIÇOS GERAIS","INTEGRAL","14/05/2026","40"],
+["CEL","SERGIO DA SILVA CRUZ","EFETIVO","G52003","MONITOR SERV. DE CONVIVENCIA","05/07/2011","PROFESSOR(A) - INICIAIS","TARDE","02/02/2026","30"],
+
+        ];
+
+        window.onload = function() {
+            document.getElementById('dataRef').value = '2026-03-31';
+            carregarTabelaEscolas();
+            carregarTabelaIdeb();
+            carregarTabelaServidores();
+        };
+
+        function limparCalculadoraCorte() {
+            document.getElementById('dataNasc').value = '';
+            document.getElementById('dataRef').value = '2026-03-31';
+            document.getElementById('resultadoCorte').style.display = 'none';
+            document.getElementById('txtIdade').innerHTML = '';
+            document.getElementById('txtClassificacao').innerHTML = '';
+        }
+
+        function showPage(pageId) {
+            const paginaCorte = document.getElementById('corte');
+            if (paginaCorte.classList.contains('active') && pageId !== 'corte') {
+                limparCalculadoraCorte();
+            }
+
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            if(pageId === 'corte') {
+                setTimeout(() => {
+                    document.getElementById('dataNasc').focus();
+                }, 50);
+            }
+
+            if(pageId === 'escolas') {
+                limparFiltroEscolas();
+                setTimeout(() => {
+                    document.getElementById('escolaSearchInput').focus();
+                }, 50);
+            }
+
+            if(pageId === 'rh') {
+                document.getElementById('usuarioRH').value = '';
+                document.getElementById('senhaRH').value = '';
+                document.getElementById('rh-login-box').style.display = 'block';
+                document.getElementById('rh-dashboard-box').style.display = 'none';
+                limparFiltroRH();
+                
+                setTimeout(() => {
+                    document.getElementById('usuarioRH').focus();
+                }, 50);
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function verificarTeclaEnter(event) {
+            if (event.key === 'Enter') {
+                autenticarRH();
+            }
+        }
+
+        function autenticarRH() {
+            const usuario = document.getElementById('usuarioRH').value;
+            const senha = document.getElementById('senhaRH').value;
+
+            if ((usuario === 'admin' && senha === '1234') || (usuario === 'sme' && senha === 'educ_')) {
+                document.getElementById('rh-login-box').style.display = 'none';
+                document.getElementById('rh-dashboard-box').style.display = 'block';
+                filtrarServidores();
+                
+                setTimeout(() => {
+                    document.getElementById('rhSearchInput').focus();
+                }, 50);
+            } else {
+                alert('Usuário ou senha inválidos.');
+            }
+        }
+
+        function carregarTabelaServidores() {
+            const tbody = document.querySelector("#tabelaServidores tbody");
+            tbody.innerHTML = "";
+            dadosServidores.forEach(linha => {
+                const tr = document.createElement("tr");
+                linha.forEach((celula, index) => {
+                    const td = document.createElement("td");
+                    td.setAttribute("data-original-value", celula); 
+                    
+                    if (index === 2 && celula.includes(" / ")) {
+                        td.innerHTML = celula.replace(" / ", "<br>");
+                    } else {
+                        td.textContent = celula;
+                    }
+                    
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filtrarServidores() {
+            const inputVal = document.getElementById("rhSearchInput").value.toLowerCase();
+            const termosBusca = inputVal.split(",")
+                                        .map(termo => termo.trim())
+                                        .filter(termo => termo !== "");
+
+            const lines = document.querySelectorAll("#tabelaServidores tbody tr");
+            let encontrados = 0;
+
+            lines.forEach(linha => {
+                const tds = linha.querySelectorAll("td");
+                let textoLinhaCompleta = "";
+                
+                tds.forEach(td => {
+                    textoLinhaCompleta += " " + td.getAttribute("data-original-value").toLowerCase();
+                });
+
+                let atendeTodosOsTermos = true;
+                for (let i = 0; i < termosBusca.length; i++) {
+                    if (!textoLinhaCompleta.includes(termosBusca[i])) {
+                        atendeTodosOsTermos = false; 
+                        break;
+                    }
+                }
+
+                if (termosBusca.length === 0) {
+                    atendeTodosOsTermos = true;
+                }
+
+                if (atendeTodosOsTermos) {
+                    linha.style.display = "";
+                    encontrados++;
+
+                    tds.forEach((td, index) => {
+                        let valorOriginal = td.getAttribute("data-original-value");
+                        
+                        if (index === 2 && valorOriginal.includes(" / ")) {
+                            valorOriginal = valorOriginal.replace(" / ", "<br>");
+                        }
+
+                        if (termosBusca.length === 0) {
+                            td.innerHTML = valorOriginal;
+                        } else {
+                            let resultadoHtml = valorOriginal;
+                            termosBusca.forEach(termo => {
+                                if(!termo) return;
+                                const regex = new RegExp(`(${escapeRegExp(termo)})`, "gi");
+                                resultadoHtml = resultadoHtml.replace(regex, "<mark class='match-highlight'>$1</mark>");
+                            });
+                            td.innerHTML = resultadoHtml;
+                        }
+                    });
+
+                } else {
+                    linha.style.display = "none";
+                }
+            });
+
+            const strRegistro = encontrados === 1 ? "registro" : "registros";
+            document.getElementById("rhCounter").textContent = `Total encontrado: ${encontrados} ${strRegistro}`;
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function limparFiltroRH() {
+            document.getElementById("rhSearchInput").value = "";
+            filtrarServidores();
+        }
+
+        function validarDatas() {
+            const inputNasc = document.getElementById('dataNasc');
+            const inputRef = document.getElementById('dataRef');
+            
+            if (inputRef.value) {
+                const partes = inputRef.value.split('-');
+                const dataFixada = `${partes[0]}-03-31`;
+                if(inputRef.value !== dataFixada) {
+                    inputRef.value = dataFixada;
+                }
+            }
+            if (inputNasc.value && inputRef.value) {
+                if (inputNasc.value > inputRef.value) {
+                    alert("A data de nascimento deve ser menor ou igual à data de referência!");
+                    inputNasc.value = "";
+                }
+            }
+        }
+
+        function calcularCorteEtario() {
+            const nascimentoInput = document.getElementById('dataNasc').value;
+            const referenciaInput = document.getElementById('dataRef').value;
+
+            if (!nascimentoInput || !referenciaInput) {
+                alert("Por favor, selecione ambas as datas.");
+                return;
+            }
+
+            const dNasc = new Date(nascimentoInput + "T00:00:00");
+            const dRef = new Date(referenciaInput + "T00:00:00");
+
+            let anos = dRef.getFullYear() - dNasc.getFullYear();
+            let meses = dRef.getMonth() - dNasc.getMonth();
+            let dias = dRef.getDate() - dNasc.getDate();
+
+            if (dias < 0) {
+                meses--;
+                const ultimoDiaMesAnterior = new Date(dRef.getFullYear(), dRef.getMonth(), 0).getDate();
+                dias += ultimoDiaMesAnterior;
+            }
+            if (meses < 0) {
+                anos--;
+                meses += 12;
+            }
+            if (anos > 100 || (anos === 100 && (meses > 0 || dias > 0))) {
+                alert("Não é permitido calcular idade maior que 100 anos.");
+                return;
+            }
+
+            const txtAno = anos === 1 ? "ano" : "anos";
+            const txtMes = meses === 1 ? "mês" : "meses";
+            const txtDia = dias === 1 ? "dia" : "dias";
+
+            // Nova lógica condicional solicitada:
+            if (anos === 0) {
+                document.getElementById('txtIdade').innerHTML = `<strong>A idade é:</strong> ${meses} ${txtMes} e ${dias} ${txtDia}`;
+            } else {
+                document.getElementById('txtIdade').innerHTML = `<strong>A idade é:</strong> ${anos} ${txtAno}, ${meses} ${txtMes} e ${dias} ${txtDia}`;
+            }
+
+            let clasificacao = "";
+            if (anos === 0 && meses < 6) clasificacao = "Não tem idade para matrícula";
+            else if (anos === 0 && meses >= 6 && meses <= 11) clasificacao = "Creche - Berçário I (0 a 3 anos)";
+            else if (anos === 1 && meses < 6) clasificacao = "Creche - Berçário II (0 a 3 anos)";
+            else if ((anos === 1 && meses >= 6) || (anos === 2)) clasificacao = "Creche - Maternal I (0 a 3 anos)";
+            else if (anos === 3) clasificacao = "Creche - Maternal II (0 a 3 anos)";
+            else if (anos === 4) clasificacao = "Pré I (4 anos)";
+            else if (anos === 5) clasificacao = "Pré II (5 anos)";
+            else if (anos === 6) clasificacao = "1º Ano (Anos Iniciais)";
+            else if (anos === 7) clasificacao = "2º Ano (Anos Iniciais)";
+            else if (anos === 8) clasificacao = "3º Ano (Anos Iniciais)";
+            else if (anos === 9) clasificacao = "4º Ano (Anos Iniciais)";
+            else if (anos === 10) clasificacao = "5º Ano (Anos Iniciais)";
+            else if (anos === 11) clasificacao = "6º Ano (Anos Finais)";
+            else if (anos === 12) clasificacao = "7º Ano (Anos Finais)";
+            else if (anos === 13) clasificacao = "8º Ano (Anos Finais)";
+            else if (anos === 14) clasificacao = "9º Ano (Anos Finais)";
+            else if (anos === 15) clasificacao = "1ª Série (Ensino Médio)";
+            else if (anos === 16) clasificacao = "2ª Série (Ensino Médio)";
+            else if (anos === 17) clasificacao = "3ª Série (Ensino Médio)";
+            else if (anos >= 18 && anos <= 100) clasificacao = "Educação de Jovens e Adultos";
+
+            document.getElementById('txtClassificacao').innerHTML = `<strong>Classificação:</strong> ${clasificacao}`;
+            document.getElementById('resultadoCorte').style.display = "block";
+        }
+
+        function carregarTabelaEscolas() {
+            const tbody = document.querySelector("#tabelaEscolas tbody");
+            tbody.innerHTML = "";
+            dadosEscolas.forEach(linha => {
+                const tr = document.createElement("tr");
+                linha.forEach(celula => {
+                    const td = document.createElement("td");
+                    td.textContent = celula;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+        }
+
+        function carregarTabelaIdeb() {
+            const tbody = document.querySelector("#tabelaIdebEscola tbody");
+            tbody.innerHTML = "";
+            
+            dadosIdebEscolas.forEach(linha => {
+                const tr = document.createElement("tr");
+                
+                let maiorNota = -1;
+                for (let i = 3; i < linha.length; i++) { 
+                    let valorNumerico = parseFloat(linha[i].replace(",", "."));
+                    if (!isNaN(valorNumerico) && valorNumerico > maiorNota) {
+                        maiorNota = valorNumerico;
+                    }
+                }
+
+                linha.forEach((celula, index) => {
+                    const td = document.createElement("td");
+                    
+                    let valorCel = parseFloat(celula.replace(",", "."));
+                    if (index >= 3 && !isNaN(valorCel) && valorCel === maiorNota) {
+                        td.innerHTML = `<strong>${celula}</strong>`;
+                    } else {
+                        td.textContent = celula;
+                    }
+
+                    if (index >= 3) {
+                        td.classList.add("col-ano");
+                    }
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filtrarEscolasMúltiplosTermos() {
+            const inputVal = document.getElementById("escolaSearchInput").value.toLowerCase();
+            const termosBusca = inputVal.split(",")
+                                        .map(termo => termo.trim())
+                                        .filter(termo => termo !== "");
+
+            const lines = document.querySelectorAll("#tabelaEscolas tbody tr");
+
+            lines.forEach(linha => {
+                const textoLinhaCompleta = linha.textContent.toLowerCase();
+                let atendeTodosOsTermos = true;
+
+                for (let i = 0; i < termosBusca.length; i++) {
+                    if (!textoLinhaCompleta.includes(termosBusca[i])) {
+                        atendeTodosOsTermos = false; 
+                        break;
+                    }
+                }
+
+                if (termosBusca.length === 0) {
+                    atendeTodosOsTermos = true;
+                }
+
+                linha.style.display = atendeTodosOsTermos ? "" : "none";
+            });
+        }
+
+        function limparFiltroEscolas() {
+            document.getElementById("escolaSearchInput").value = "";
+            filtrarEscolasMúltiplosTermos();
+        }
+    </script>
+</body>
+</html>
